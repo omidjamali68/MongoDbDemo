@@ -40,4 +40,10 @@ public class CategoriesController : ControllerBase
 
         return category;
     }
+
+    [HttpPut("{id}")]
+    public async Task Put(string id,[FromBody] Category category)
+    {
+        await _service.UpdateAsync(id, category);        
+    }
 }

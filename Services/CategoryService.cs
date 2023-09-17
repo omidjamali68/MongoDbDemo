@@ -29,4 +29,9 @@ public class CategoryService : ICategoryService
     {
         return await _categoryCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
     }
+
+    public async Task UpdateAsync(string id, Category category)
+    {        
+        await _categoryCollection.ReplaceOneAsync(x => x.Id == id, category);
+    }
 }
