@@ -46,4 +46,10 @@ public class CategoriesController : ControllerBase
     {
         await _service.UpdateAsync(id, category);        
     }
+
+    [HttpDelete("{id}")]
+    public async Task Delete(string id)
+    {
+        await _service.DeleteAsync(id);
+    }
 }

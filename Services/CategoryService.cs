@@ -20,6 +20,11 @@ public class CategoryService : ICategoryService
         return category.Id;
     }
 
+    public async Task DeleteAsync(string id)
+    {
+        await _categoryCollection.DeleteOneAsync(x => x.Id == id);
+    }
+
     public async Task<List<Category>> GetAllAsync()
     {
         return await _categoryCollection.Find(x => true).ToListAsync();
