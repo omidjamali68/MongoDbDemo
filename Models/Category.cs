@@ -6,6 +6,7 @@ namespace  MongoDbDemo.Models;
 public class Category
 {
     [BsonId]
-    public string Id { get; set; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string Id { get; set; } = string.Empty;
     public string Title { get; set; }
 }

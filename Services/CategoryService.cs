@@ -24,4 +24,9 @@ public class CategoryService : ICategoryService
     {
         return await _categoryCollection.Find(x => true).ToListAsync();
     }
+
+    public async Task<Category> GetByIdAsync(string id)
+    {
+        return await _categoryCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+    }
 }

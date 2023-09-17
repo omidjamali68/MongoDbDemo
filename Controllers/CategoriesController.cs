@@ -5,7 +5,7 @@ using MongoDbDemo.Services;
 namespace MongoDbDemo;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class CategoriesController : ControllerBase
 {
     private readonly ICategoryService _service;
@@ -22,8 +22,22 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<string> Add([FromBody] Category category)
+    public async Task<ActionResult<string>> Add([FromBody] Category category)
     {
-        return await _service.AddAsync(category);
+        var id = await _service.AddAsync(category);
+        return CreatedAtAction(nameof(Add), id);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Category>> GetById(string id)
+    {
+        var category = await _service.GetByIdAsync(id);
+
+        if (category is null)
+        {
+            return NotFound($"Category with Id = {id} Not found");
+        }
+
+        return category;
     }
 }
